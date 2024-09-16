@@ -97,4 +97,17 @@
     #   push = { autoSetupRemote = true; };
     # };
   };
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "github.com" = {
+        host = "github.com";
+        identityFile = "~/.ssh/github_key";
+        extraOptions = {
+          AddKeysToAgent = "yes";
+        };
+      };
+    };
+  };
+
 }
