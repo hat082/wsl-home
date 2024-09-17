@@ -1,5 +1,17 @@
 { config, pkgs, ... }:
 
+let
+  custom_latex_env = pkgs.texlive.combine {
+    inherit (pkgs.texlive) scheme-small;  # Use the minimal TeX Live installation
+    
+    pkgs = with pkgs.texlive; [
+      amsmath
+      tikz
+      # add more packages here
+    ];
+  };
+in
+
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -9,12 +21,15 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   fonts.fontconfig.enable = true;
-  home.packages = [
-    pkgs.lazygit
-    pkgs.miracode
-    pkgs.tmux
-    pkgs.gcc
-    pkgs.neovim
+  home.packages = with pkgs; [
+    lazygit
+    miracode
+    tmux
+    gcc
+    neovim
+    ripgrep
+    biber  # For bibliography management
+    custom_latex_env
   ];
 
   home.file = {
