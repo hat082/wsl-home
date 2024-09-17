@@ -10,9 +10,11 @@
 
   fonts.fontconfig.enable = true;
   home.packages = [
-    pkgs.neovim
     pkgs.lazygit
     pkgs.miracode
+    pkgs.tmux
+    pkgs.gcc
+    pkgs.neovim
   ];
 
   home.file = {
@@ -22,19 +24,6 @@
   };
 
   programs.home-manager.enable = true;
-
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      s = "home-manager switch --flake ~/wsl-home";
-      c = "clear";
-      vi = "nvim";
-      vim = "nvim";
-      lg = "lazygit";
-    };
-    initExtra = "set -o vi\n";
-      
-  };
 
   programs.git = {
     enable = true;
@@ -78,6 +67,9 @@
       vi = "nvim";
       vim = "nvim";
       lg = "lazygit";
+      t = "tmux";
+
+
     };
   };
 
