@@ -1,15 +1,13 @@
 { config, pkgs, ... }:
 
 let
-  custom_latex_env = pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-small;  # Use the minimal TeX Live installation
-    
-    pkgs = with pkgs.texlive; [
-      amsmath
-      tikz
-      # add more packages here
-    ];
-  };
+  tex = (pkgs.texlive.combine {
+    inherit (pkgs.texlive) scheme-basic
+      dvisvgm dvipng # for preview and export as html
+      wrapfig amsmath ulem hyperref capt-of;
+      #(setq org-latex-compiler "lualatex")
+      #(setq org-preview-latex-default-process 'dvisvgm)
+  });
 in
 
 {
@@ -29,7 +27,7 @@ in
     neovim
     ripgrep
     biber  # For bibliography management
-    custom_latex_env
+    tex
   ];
 
   home.file = {
@@ -91,5 +89,13 @@ in
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    options = [
+      "--cmd cd"
+    ];
+
   };
 }
