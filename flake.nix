@@ -19,9 +19,10 @@
         system = system;
         overlays = [ nixgl.overlay ];
       };
+  environmentName = builtins.getEnv "USER"; # This will get the current user's name
     in
     {
-      homeConfigurations."asus-ub" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."${environmentName}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,

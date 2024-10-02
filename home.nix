@@ -13,8 +13,8 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "asus-ub";
-  home.homeDirectory = "/home/asus-ub";
+  home.username = builtins.getEnv("USER");
+  home.homeDirectory = builtins.getEnv("HOME");
 
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
@@ -25,10 +25,8 @@ in
     tmux
     neovim
     ripgrep
-    biber # For bibliography management
-    tex
-    texlivePackages.xcolor
-    texlivePackages.amsmath
+    # biber # For bibliography management
+    # tex
     unzip
     cargo
     gcc
@@ -81,7 +79,7 @@ in
     '';
 
     shellAliases = {
-      s = "home-manager switch --flake ~/wsl-home";
+      s = "home-manager switch --flake ~/wsl-home --impure";
       c = "clear";
       vi = "nvim";
       vim = "nvim";
