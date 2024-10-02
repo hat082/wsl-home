@@ -2,11 +2,11 @@
 
 let
   tex = (pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-basic
-      dvisvgm dvipng # for preview and export as html
-      wrapfig amsmath ulem hyperref capt-of;
-      #(setq org-latex-compiler "lualatex")
-      #(setq org-preview-latex-default-process 'dvisvgm)
+    inherit (pkgs.texlive) scheme-medium xcolor;
+      # dvisvgm dvipng # for preview and export as html
+      # wrapfig amsmath ulem hyperref capt-of listings latexmk xcolor;
+    #(setq org-latex-compiler "lualatex")
+    #(setq org-preview-latex-default-process 'dvisvgm)
   });
 in
 
@@ -23,28 +23,34 @@ in
     lazygit
     miracode
     tmux
-    gcc
     neovim
     ripgrep
-    biber  # For bibliography management
+    biber # For bibliography management
     tex
+    texlivePackages.xcolor
+    texlivePackages.amsmath
+    unzip
+    cargo
+    gcc
+    bat
+    eza
+    zathura
   ];
 
-  home.file = {
-  };
+  home.file = { };
 
-  home.sessionVariables = {
-  };
+  home.sessionVariables = { };
 
   programs.home-manager.enable = true;
 
   programs.git = {
     enable = true;
-    userName  = "hat082";
+    userName = "hat082";
     userEmail = "2798638863@qq.com";
-    # extraConfig = {
-    #   push = { autoSetupRemote = true; };
-    # };
+    extraConfig = {
+      # git config --global init.defaultBranch <name>
+      init.defaultBranch = "main";
+    };
   };
 
   programs.ssh = {
@@ -71,9 +77,9 @@ in
       theme = "dst";
     };
     initExtra = ''
-      bindkey '^f' autosuggest-accept
-      set -o vi
+      source ~/wsl-home/terminal/zsh.sh
     '';
+
     shellAliases = {
       s = "home-manager switch --flake ~/wsl-home";
       c = "clear";
@@ -81,8 +87,8 @@ in
       vim = "nvim";
       lg = "lazygit";
       t = "tmux";
-
-
+      ls = "eza";
+      cat = "bat";
     };
   };
 
@@ -97,5 +103,9 @@ in
       "--cmd cd"
     ];
 
+  };
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 }
