@@ -18,8 +18,8 @@
       pkgs = import nixpkgs {
         system = system;
         overlays = [ nixgl.overlay ];
-      };
-  environmentName = builtins.getEnv "USER"; # This will get the current user's name
+      }; 
+      environmentName = builtins.getEnv "USER"; # This will get the current user's name
     in
     {
       homeConfigurations."${environmentName}" = home-manager.lib.homeManagerConfiguration {

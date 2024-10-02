@@ -35,7 +35,16 @@ in
     zathura
   ];
 
-  home.file = { };
+  home.file = { 
+    ".tmux.conf" = {
+      source = ~/wsl-home/terminal/.tmux.conf;
+    };
+    ".config/nvim" = {
+      source = ~/wsl-home/nvim;
+      recursive = true;
+    };
+
+  };
 
   home.sessionVariables = { };
 
