@@ -2,7 +2,7 @@
 
 let
   tex = (pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-medium xcolor;
+    inherit (pkgs.texlive) scheme-full;
       # dvisvgm dvipng # for preview and export as html
       # wrapfig amsmath ulem hyperref capt-of listings latexmk xcolor;
     #(setq org-latex-compiler "lualatex")
@@ -25,8 +25,8 @@ in
     tmux
     neovim
     ripgrep
-    # biber # For bibliography management
-    # tex
+    biber # For bibliography management
+    tex
     unzip
     cargo
     gcc
