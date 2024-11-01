@@ -25,7 +25,6 @@ in
     tmux
     neovim
     ripgrep
-    biber # For bibliography management
     tex
     unzip
     cargo
