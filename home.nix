@@ -38,11 +38,6 @@ in
     ".tmux.conf" = {
       source = ~/wsl-home/terminal/.tmux.conf;
     };
-    ".config/nvim" = {
-      source = ~/wsl-home/nvim;
-      recursive = true;
-    };
-
   };
 
   home.sessionVariables = { };
@@ -92,7 +87,7 @@ in
       vi = "nvim";
       vim = "nvim";
       lg = "lazygit";
-      t = "tmux";
+      t = "~/.local/bin/session-starter/session-starter.sh";
       ls = "eza";
       cat = "bat";
     };
