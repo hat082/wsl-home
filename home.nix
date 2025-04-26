@@ -1,20 +1,20 @@
-{ config, pkgs, ... }:
-
-let
-  tex = (pkgs.texlive.combine {
+{
+  config,
+  pkgs,
+  ...
+}: let
+  tex = pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-full;
-      # dvisvgm dvipng # for preview and export as html
-      # wrapfig amsmath ulem hyperref capt-of listings latexmk xcolor;
+    # dvisvgm dvipng # for preview and export as html
+    # wrapfig amsmath ulem hyperref capt-of listings latexmk xcolor;
     #(setq org-latex-compiler "lualatex")
     #(setq org-preview-latex-default-process 'dvisvgm)
-  });
-in
-
-{
+  };
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = builtins.getEnv("USER");
-  home.homeDirectory = builtins.getEnv("HOME");
+  home.username = builtins.getEnv "USER";
+  home.homeDirectory = builtins.getEnv "HOME";
 
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
@@ -25,22 +25,29 @@ in
     tmux
     neovim
     ripgrep
+    fd
+    yazi
     tex
     unzip
     cargo
+    go
     gcc
     bat
     eza
-    zathura
+    alejandra
+    xdg_utils
+    lua
+    bear
+    gdb
   ];
 
-  home.file = { 
-    ".tmux.conf" = {
-      source = ~/wsl-home/terminal/.tmux.conf;
-    };
-  };
+  # home.file.".clangd".text = ''
+  #   CompileFlags:
+  #     Add: [-std=c++17, -I/usr/include, -I/usr/local/include]
+  #   FallbackFlags: [-Wall, -Wextra, -Wpedantic]
+  # '';
 
-  home.sessionVariables = { };
+  home.sessionVariables = {};
 
   programs.home-manager.enable = true;
 
@@ -80,17 +87,6 @@ in
     initExtra = ''
       source ~/wsl-home/terminal/zsh.sh
     '';
-
-    shellAliases = {
-      s = "home-manager switch --flake ~/wsl-home --impure";
-      c = "clear";
-      vi = "nvim";
-      vim = "nvim";
-      lg = "lazygit";
-      t = "~/.local/bin/session-starter/session-starter.sh";
-      ls = "eza";
-      cat = "bat";
-    };
   };
 
   programs.fzf = {
@@ -103,10 +99,13 @@ in
     options = [
       "--cmd cd"
     ];
-
   };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }
