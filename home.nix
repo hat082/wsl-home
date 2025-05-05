@@ -3,13 +3,6 @@
   pkgs,
   ...
 }: let
-  tex = pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-full;
-    # dvisvgm dvipng # for preview and export as html
-    # wrapfig amsmath ulem hyperref capt-of listings latexmk xcolor;
-    #(setq org-latex-compiler "lualatex")
-    #(setq org-preview-latex-default-process 'dvisvgm)
-  };
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -27,7 +20,6 @@ in {
     ripgrep
     fd
     yazi
-    tex
     unzip
     cargo
     go
@@ -35,10 +27,11 @@ in {
     bat
     eza
     alejandra
-    xdg_utils
+    xdg-utils
     lua
     bear
     gdb
+    typst
   ];
 
   # home.file.".clangd".text = ''
@@ -58,6 +51,14 @@ in {
     extraConfig = {
       # git config --global init.defaultBranch <name>
       init.defaultBranch = "main";
+      url = {
+        "git@github.com:" = {
+          insteadOf = "gh:";
+        };
+        "git@github.com:hat082/" = {
+          insteadOf = "ha:";
+        };
+      };
     };
   };
 

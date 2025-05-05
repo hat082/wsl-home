@@ -29,3 +29,5 @@ alias lg="lazygit"
 alias e="explorer.exe ."
 alias ls="eza"
 alias cat="bat"
+
+alias gcl="git clone"
