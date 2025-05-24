@@ -31,7 +31,8 @@ in {
     lua
     bear
     gdb
-    typst
+    typst 
+    pdf2svg
   ];
 
   # home.file.".clangd".text = ''
